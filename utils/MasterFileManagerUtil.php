@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 if (!function_exists('renderMasterFileManagerView')) {
     function renderMasterFileManagerView(array|object $request = []): View
     {
-        $requestData = isset($request) && !empty($request->all()) ? $request->all() : \request()->all();
+        $requestData = $request ?? \request();
         $targetFolder = urldecode($requestData['targetFolder'] ?? '');
         $AllFilesInCurrentFolder = MasterFileManagerService::getAllfiles(targetFolder: $targetFolder, request: $requestData);
         $folderArray = MasterFileManagerService::getAllFolders($targetFolder);
