@@ -5,7 +5,10 @@
     "autoload": {
         "psr-4": {
             "Devrabiul\\MasterFileManager\\": "src/"
-        }
+        },
+        "files": [
+            "utils/MasterFileManagerUtil.php"
+        ]
     },
     "authors": [
         {
