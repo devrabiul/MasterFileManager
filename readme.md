@@ -15,3 +15,16 @@ In Laravel application, need to publish the resources:
 php artisan vendor:publish --provider="Devrabiul\MasterFileManager\MasterFileManagerServiceProvider"
 ```
 
+```php
+{!! renderMasterFileManagerStyle() !!}
+```
+
+
+```php
+{!! renderMasterFileManagerView() !!}
+```
+
+
+```php
+{!! renderMasterFileManagerJavaScript() !!}
+```

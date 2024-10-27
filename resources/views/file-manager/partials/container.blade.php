@@ -1,21 +1,23 @@
-<div>
-    @forelse(range(1, 30) as $fileItem)
-        <div>
-            <div>
-                <i class="bi bi-folder-fill"></i>
+<div class="master-file-manager">
+    <div class="folder">
+        @forelse(range(1, 30) as $fileItem)
+            <div class="folder-item">
+                <div>
+                    @include("master-file-manager::file-manager.icons._folder")
+                </div>
+                <div>
+                    {{ $fileItem }}
+                </div>
             </div>
-            <div>
-                {{ $fileItem }}
+        @empty
+            <div class="folder-item">
+                <div>
+                    @include("master-file-manager::file-manager.icons._folder")
+                </div>
+                <div>
+                    No Items
+                </div>
             </div>
-        </div>
-    @empty
-        <div>
-            <div>
-                <i class="bi bi-folder-fill"></i>
-            </div>
-            <div>
-                No Items
-            </div>
-        </div>
-    @endforelse
+        @endforelse
+    </div>
 </div>

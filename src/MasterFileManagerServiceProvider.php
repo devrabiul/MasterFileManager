@@ -38,10 +38,38 @@ class MasterFileManagerServiceProvider extends ServiceProvider
 
     private function registerPublishing()
     {
+        // Define the publishing path for the views
+        $publishPath = resource_path('views/vendor/master-file-manager');
+
+        // Check if the views already exist, and if so, remove them
+        if (is_dir($publishPath)) {
+            $this->deleteDirectory($publishPath);
+        }
+
         $this->publishes([
             __DIR__.'/../config/master-file-manager.php' => config_path('master-file-manager.php'),
-            __DIR__.'/../resources/views' => resource_path('views/vendor/master-file-manager'),
+            __DIR__.'/../resources/views' => $publishPath,
         ]);
+    }
+
+    /**
+     * Recursively delete a directory.
+     *
+     * @param string $dir
+     * @return void
+     */
+    private function deleteDirectory($dir)
+    {
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') continue;
+            $itemPath = $dir . DIRECTORY_SEPARATOR . $item;
+            if (is_dir($itemPath)) {
+                $this->deleteDirectory($itemPath);
+            } else {
+                unlink($itemPath);
+            }
+        }
+        rmdir($dir);
     }
 
 }
