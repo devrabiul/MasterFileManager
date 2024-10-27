@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'name' => 'Master File Manager',
+    'name' => 'Master File Manager',
 ];

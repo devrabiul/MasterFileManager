@@ -2,7 +2,6 @@
 
 namespace Devrabiul\MasterFileManager;
 
-use Closure;
 use Devrabiul\MasterFileManager\Console\EmptyTrash;
 use Illuminate\Support\ServiceProvider;
 
