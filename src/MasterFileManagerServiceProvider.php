@@ -39,7 +39,7 @@ class MasterFileManagerServiceProvider extends ServiceProvider
     private function registerPublishing()
     {
         $this->publishes([
-            __DIR__.'/../config/file-manager.php' => config_path('master-file-manager.php')
+            __DIR__.'/../config/master-file-manager.php' => config_path('master-file-manager.php')
         ]);
     }
 
