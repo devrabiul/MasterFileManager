@@ -1,10 +1,10 @@
 {
-    "name": "devrabiul/file-manager",
+    "name": "devrabiul/master-file-manager",
     "description": "Practice",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Devrabiul\\FileManager\\": "src/"
+            "Devrabiul\\MasterFileManager\\": "src/"
         }
     },
     "authors": [
@@ -13,6 +13,21 @@
         }
     ],
     "require-dev": {
-        "orchestra/testbench": "^9.5"
-    }
+        "orchestra/testbench": "^9.5",
+        "phpunit/phpunit": "^11.4"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Devrabiul\\MasterFileManager\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel" :{
+            "providers" : [
+                "MasterFileManagerServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
