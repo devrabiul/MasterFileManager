@@ -1,3 +1,5 @@
+{!! renderMasterFileManagerStyle() !!}
+
 {!! renderMasterFileManagerView() !!}
 
 {!! renderMasterFileManagerJavaScript() !!}
