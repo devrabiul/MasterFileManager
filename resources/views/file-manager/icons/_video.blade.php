@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
         <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg height="50px" width="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+<svg height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      viewBox="0 0 512 512" xml:space="preserve">
 <g>
     <path style="fill:#3083C9;" d="M494.345,423.724H17.655C7.901,423.724,0,415.823,0,406.069V105.931

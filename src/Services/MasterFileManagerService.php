@@ -11,6 +11,8 @@ class MasterFileManagerService
     public static function getAllFiles($targetFolder = null, object|array $request = null): array
     {
         $GenData = [];
+        $request = !empty($request) ? $request : request()->all();
+        $targetFolder = !empty($targetFolder) ? $targetFolder : request('targetFolder');
         $AllFilesInCurrentFolder = Storage::disk('public')->allFiles($targetFolder);
         $GenData['path'] = $AllFilesInCurrentFolder;
 
@@ -18,19 +20,21 @@ class MasterFileManagerService
         foreach ($AllFilesInCurrentFolder as $file) {
             $type = explode('/', Storage::disk('public')->mimeType($file))[0];
             $name = explode('/', $file);
-            if ((!empty($request['filter']) && $type == $request['filter']) || (empty($request['filter']) || ($request['filter'] == 'all'))) {
-                $FilesWithInfo[] = [
-                    'name' => end($name),
-                    'short_name' => getFileMinifyString(end($name)),
-                    'path' => $file,
-                    'encodePath' => Crypt::encryptString($file),
-                    'type' => $type,
-                    'icon' => self::getIconByExtension(extension: pathinfo($file, PATHINFO_EXTENSION)),
-                    'size' => getMasterFileFormatSize(Storage::disk('public')->size($file)),
-                    'sizeInInteger' => Storage::disk('public')->size($file),
-                    'extension' => pathinfo($file, PATHINFO_EXTENSION),
-                    'last_modified' => Carbon::parse(date('Y-m-d H:i:s', Storage::disk('public')->lastModified($file)))->diffForHumans()
-                ];
+            if (!empty($targetFolder) && count($name) > 1) {
+                if ((!empty($request['filter']) && $type == $request['filter']) || (empty($request['filter']) || ($request['filter'] == 'all'))) {
+                    $FilesWithInfo[] = [
+                        'name' => end($name),
+                        'short_name' => getFileMinifyString(end($name)),
+                        'path' => $file,
+                        'encodePath' => Crypt::encryptString($file),
+                        'type' => $type,
+                        'icon' => self::getIconByExtension(extension: pathinfo($file, PATHINFO_EXTENSION)),
+                        'size' => getMasterFileFormatSize(Storage::disk('public')->size($file)),
+                        'sizeInInteger' => Storage::disk('public')->size($file),
+                        'extension' => pathinfo($file, PATHINFO_EXTENSION),
+                        'last_modified' => Carbon::parse(date('Y-m-d H:i:s', Storage::disk('public')->lastModified($file)))->diffForHumans()
+                    ];
+                }
             }
         }
 
@@ -63,7 +67,7 @@ class MasterFileManagerService
                 'name' => end($name),
                 'path' => $folder,
                 'encodePath' => Crypt::encryptString($folder),
-                'lastPath' => str_replace(end($name),'', $folder),
+                'lastPath' => str_replace(end($name), '', $folder),
                 'type' => 'Folder',
                 'icon' => self::getIconByExtension(extension: 'folder'),
                 'last_modified' => Carbon::parse(date('Y-m-d H:i:s', Storage::disk('public')->lastModified($folder)))->diffForHumans(),
@@ -74,7 +78,7 @@ class MasterFileManagerService
             ];
         }
 
-        usort($folderArray, function($a, $b) {
+        usort($folderArray, function ($a, $b) {
             return strcmp($a['name'], $b['name']);
         });
 
@@ -85,22 +89,22 @@ class MasterFileManagerService
     {
         $iconMapping = [
             'folder' => '<i class="fas fa-folder"></i>',
-            'jpg'    => '<i class="fas fa-image"></i>',
-            'jpeg'   => '<i class="fas fa-image"></i>',
-            'png'    => '<i class="fas fa-image"></i>',
-            'pdf'    => '<i class="fas fa-file-pdf"></i>',
-            'zip'    => '<i class="far fa-file-archive"></i>',
-            'doc'    => '<i class="fas fa-file-word"></i>',
-            'docx'   => '<i class="fas fa-file-word"></i>',
-            'xls'    => '<i class="fas fa-file-excel"></i>',
-            'xlsx'   => '<i class="fas fa-file-excel"></i>',
-            'ppt'    => '<i class="fas fa-file-powerpoint"></i>',
-            'pptx'   => '<i class="fas fa-file-powerpoint"></i>',
-            'txt'    => '<i class="fas fa-file-alt"></i>',
-            'mp3'    => '<i class="fas fa-music"></i>',
-            'wav'    => '<i class="fas fa-music"></i>',
-            'mp4'    => '<i class="fas fa-film"></i>',
-            'avi'    => '<i class="fas fa-film"></i>',
+            'jpg' => '<i class="fas fa-image"></i>',
+            'jpeg' => '<i class="fas fa-image"></i>',
+            'png' => '<i class="fas fa-image"></i>',
+            'pdf' => '<i class="fas fa-file-pdf"></i>',
+            'zip' => '<i class="far fa-file-archive"></i>',
+            'doc' => '<i class="fas fa-file-word"></i>',
+            'docx' => '<i class="fas fa-file-word"></i>',
+            'xls' => '<i class="fas fa-file-excel"></i>',
+            'xlsx' => '<i class="fas fa-file-excel"></i>',
+            'ppt' => '<i class="fas fa-file-powerpoint"></i>',
+            'pptx' => '<i class="fas fa-file-powerpoint"></i>',
+            'txt' => '<i class="fas fa-file-alt"></i>',
+            'mp3' => '<i class="fas fa-music"></i>',
+            'wav' => '<i class="fas fa-music"></i>',
+            'mp4' => '<i class="fas fa-film"></i>',
+            'avi' => '<i class="fas fa-film"></i>',
             // Add more file extensions as needed
         ];
         return $iconMapping[$extension] ?? '<i class="fas fa-file"></i>';
