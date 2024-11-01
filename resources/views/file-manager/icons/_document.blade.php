@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-        <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg height="40px" width="40px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 512 512" xml:space="preserve">
-<path style="fill:#167EE6;" d="M439.652,512H72.348c-9.217,0-16.696-7.479-16.696-16.696V16.696C55.652,7.479,63.131,0,72.348,0
-	h233.739c4.424,0,8.674,1.761,11.804,4.892l133.565,133.565c3.131,3.13,4.892,7.379,4.892,11.804v345.043
-	C456.348,504.521,448.869,512,439.652,512z"/>
-    <path style="fill:#2860CC;" d="M317.891,4.892C314.761,1.761,310.511,0,306.087,0H256v512h183.652
-	c9.217,0,16.696-7.479,16.696-16.696V150.261c0-4.424-1.761-8.674-4.892-11.804L317.891,4.892z"/>
-    <path style="fill:#167EE6;" d="M451.459,138.459L317.891,4.892C314.76,1.76,310.511,0,306.082,0h-16.691l0.001,150.261
-	c0,9.22,7.475,16.696,16.696,16.696h150.26v-16.696C456.348,145.834,454.589,141.589,451.459,138.459z"/>
-    <path style="fill:#FFFFFF;" d="M272.696,411.826H139.13c-9.217,0-16.696-7.479-16.696-16.696c0-9.217,7.479-16.696,16.696-16.696
-	h133.565c9.217,0,16.696,7.479,16.696,16.696C289.391,404.348,281.913,411.826,272.696,411.826z"/>
-    <path style="fill:#E6F3FF;" d="M272.696,378.435H256v33.391h16.696c9.217,0,16.696-7.479,16.696-16.696
-	C289.391,385.913,281.913,378.435,272.696,378.435z"/>
-    <path style="fill:#FFFFFF;" d="M372.87,345.043H139.13c-9.217,0-16.696-7.479-16.696-16.696c0-9.217,7.479-16.696,16.696-16.696
-	H372.87c9.217,0,16.696,7.479,16.696,16.696C389.565,337.565,382.087,345.043,372.87,345.043z"/>
-    <path style="fill:#E6F3FF;" d="M372.87,311.652H256v33.391h116.87c9.217,0,16.696-7.479,16.696-16.696
-	C389.565,319.131,382.087,311.652,372.87,311.652z"/>
-    <path style="fill:#FFFFFF;" d="M372.87,278.261H139.13c-9.217,0-16.696-7.479-16.696-16.696c0-9.217,7.479-16.696,16.696-16.696
-	H372.87c9.217,0,16.696,7.479,16.696,16.696C389.565,270.782,382.087,278.261,372.87,278.261z"/>
-    <path style="fill:#E6F3FF;" d="M372.87,244.87H256v33.391h116.87c9.217,0,16.696-7.479,16.696-16.696
-	C389.565,252.348,382.087,244.87,372.87,244.87z"/>
+<svg width="{{ isset($width) ? $width : '40px' }}" height="{{ isset($height) ? $height : '40px' }}" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 505 505" xml:space="preserve">
+<circle style="fill:#FFD05B;" cx="252.5" cy="252.5" r="252.5"/>
+    <path style="fill:#4CDBC4;" d="M179.3,126.3h-76.9c-2.2,0-4.1,1.8-4.1,4.1v244.4c0,2.2,1.8,4.1,4.1,4.1h76.9c2.2,0,4.1-1.8,4.1-4.1
+	V130.3C183.3,128.1,181.5,126.3,179.3,126.3z"/>
+    <circle style="fill:#324A5E;" cx="140.8" cy="164.2" r="22.3"/>
+    <g>
+        <circle style="fill:#FFFFFF;" cx="140.8" cy="164.2" r="14.9"/>
+        <rect x="111.4" y="224.1" style="fill:#FFFFFF;" width="58.8" height="141.4"/>
+    </g>
+    <g>
+        <rect x="120.3" y="240.9" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="120.3" y="261.1" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="120.3" y="281.4" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="120.3" y="301.7" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="120.3" y="321.9" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="120.3" y="342.2" style="fill:#CED5E0;" width="41" height="6.5"/>
+    </g>
+    <path style="fill:#FF7058;" d="M284.2,126.3h-76.9c-2.2,0-4.1,1.8-4.1,4.1v244.4c0,2.2,1.8,4.1,4.1,4.1h76.9c2.2,0,4.1-1.8,4.1-4.1
+	V130.3C288.3,128.1,286.5,126.3,284.2,126.3z"/>
+    <circle style="fill:#324A5E;" cx="245.8" cy="164.2" r="22.3"/>
+    <g>
+        <circle style="fill:#FFFFFF;" cx="245.8" cy="164.2" r="14.9"/>
+        <rect x="216.4" y="224.1" style="fill:#FFFFFF;" width="58.8" height="141.4"/>
+    </g>
+    <g>
+        <rect x="225.3" y="240.9" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="225.3" y="261.1" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="225.3" y="281.4" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="225.3" y="301.7" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="225.3" y="321.9" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="225.3" y="342.2" style="fill:#CED5E0;" width="41" height="6.5"/>
+    </g>
+    <path style="fill:#324A5E;" d="M389.2,126.3h-76.9c-2.2,0-4.1,1.8-4.1,4.1v244.4c0,2.2,1.8,4.1,4.1,4.1h76.9c2.2,0,4.1-1.8,4.1-4.1
+	V130.3C393.2,128.1,391.4,126.3,389.2,126.3z"/>
+    <circle style="fill:#4CDBC4;" cx="350.7" cy="164.2" r="22.3"/>
+    <g>
+        <circle style="fill:#FFFFFF;" cx="350.7" cy="164.2" r="14.9"/>
+        <rect x="321.3" y="224.1" style="fill:#FFFFFF;" width="58.8" height="141.4"/>
+    </g>
+    <g>
+        <rect x="330.2" y="240.9" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="330.2" y="261.1" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="330.2" y="281.4" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="330.2" y="301.7" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="330.2" y="321.9" style="fill:#CED5E0;" width="41" height="6.5"/>
+        <rect x="330.2" y="342.2" style="fill:#CED5E0;" width="41" height="6.5"/>
+    </g>
 </svg>

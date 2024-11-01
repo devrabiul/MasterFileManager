@@ -1,19 +1,21 @@
 <script>
-    function openFolderByAjax(pathName, folderName) {
+    function openFolderByAjax(targetFolder, folderName) {
+        const url = new URL(window.location.href);
+
         $.ajax({
             url: "{{ route('master-file-manager.folder-content') }}",
             type: 'POST',
             data: {
                 _token: $('meta[name="csrf-token"]').attr('content'),
-                path: pathName,
-                folder: folderName,
+                targetFolder: targetFolder,
             },
-            success: function (data) {
-                // $('.file_manager_folder_content').empty().html(data.htmlView);
-
-                $('.file_manager_folder_content').fadeOut('fast', function () {
-                    $(this).empty().html(data.htmlView).fadeIn('fast');
+            success: function (response) {
+                $('.master-file-manager-container').fadeOut('fast', function () {
+                    $(this).empty().html(response.html).fadeIn('fast');
                 });
+
+                targetFolder ? url.searchParams.set('targetFolder', targetFolder) : url.searchParams.delete('targetFolder');
+                window.history.pushState({}, '', url);
             },
         });
     }
