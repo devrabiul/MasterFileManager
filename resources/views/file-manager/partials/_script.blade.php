@@ -10,7 +10,7 @@
                 targetFolder: targetFolder,
             },
             beforeSend: function () {
-                $(".master-file-manager-loader-container").addClass('loader-container-hide');
+                $(".master-file-manager-loader-container").removeClass('loader-container-hide');
             },
             success: function (response) {
                 $('.master-file-manager-container').fadeOut('fast', function () {
@@ -21,7 +21,7 @@
                 window.history.pushState({}, '', url);
             },
             complete: function () {
-                $(".master-file-manager-loader-container").removeClass('loader-container-hide');
+                $(".master-file-manager-loader-container").addClass('loader-container-hide');
             },
         });
     }

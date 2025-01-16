@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Cache;
 
 use Devrabiul\MasterFileManager\Services\MasterFileManagerService;
 use Illuminate\Contracts\View\View;
@@ -9,11 +10,29 @@ if (!function_exists('renderMasterFileManagerView')) {
     {
         $requestData = !empty($request) ? $request : request()->all();
         $targetFolder = urldecode($requestData['targetFolder'] ?? '');
-        $AllFilesInCurrentFolder = MasterFileManagerService::getAllfiles(targetFolder: $targetFolder, request: $requestData);
-        $folderArray = MasterFileManagerService::getAllFolders($targetFolder);
+
+        $cacheKeyFiles = "files_in_{$targetFolder}";
+        $cacheKeyFolders = "folders_in_{$targetFolder}";
+        $cacheKeyOverview = "overview_in_{$targetFolder}";
+
+        masterFileManagerCacheKeys($cacheKeyFiles);
+        masterFileManagerCacheKeys($cacheKeyFolders);
+        masterFileManagerCacheKeys($cacheKeyOverview);
+
+        $AllFilesInCurrentFolder = Cache::remember($cacheKeyFiles, 3600, function () use ($targetFolder, $requestData) {
+            return MasterFileManagerService::getAllFiles(targetFolder: $targetFolder, request: $requestData);
+        });
+
+        $folderArray = Cache::remember($cacheKeyFolders, 3600, function () use ($targetFolder) {
+            return MasterFileManagerService::getAllFolders($targetFolder);
+        });
+
+        $AllFilesOverview = Cache::remember($cacheKeyOverview, 3600, function () use ($AllFilesInCurrentFolder) {
+            return MasterFileManagerService::getAllFilesOverview(AllFilesWithInfo: $AllFilesInCurrentFolder);
+        });
+
         $lastFolderArray = explode('/', $targetFolder);
         $lastFolder = count($lastFolderArray) > 1 ? str_replace('/' . end($lastFolderArray), '', $targetFolder) : '';
-        $AllFilesOverview = MasterFileManagerService::getAllFilesOverview(AllFilesWithInfo: $AllFilesInCurrentFolder);
 
         return view('master-file-manager::file-manager.partials.container', [
             'folderArray' => $folderArray,
@@ -76,3 +95,16 @@ if (!function_exists('masterFileManagerAsset')) {
         return asset($result);
     }
 }
+
+
+if (!function_exists('masterFileManagerCacheKeys')) {
+    function masterFileManagerCacheKeys($cacheKey): void
+    {
+        $cacheKeys = Cache::get('masterFileManagerCacheKeys', []);
+        if (!in_array($cacheKey, $cacheKeys)) {
+            $cacheKeys[] = $cacheKey;
+            Cache::put('masterFileManagerCacheKeys', $cacheKeys, 60 * 60 * 3);
+        }
+    }
+}
+
