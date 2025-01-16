@@ -8,8 +8,18 @@ use Illuminate\Support\ServiceProvider;
 class MasterFileManagerServiceProvider extends ServiceProvider
 {
 
-    public function boot()
+    public function boot(): void
     {
+        // Set the SYSTEM_PROCESSING_DIRECTORY value
+        $fileContent = file_get_contents('index.php');
+        if (preg_match('/const SYSTEM_PROCESSING_DIRECTORY = \'(.*?)\';/', $fileContent, $matches)) {
+            $systemProcessingDirectory = $matches[1];
+        } else {
+            $systemProcessingDirectory = 'root';
+        }
+        // Update the configuration
+        config(['master-file-manager.system_processing_directory' => $systemProcessingDirectory]);
+
         if ($this->app->runningInConsole()) {
             $this->registerPublishing();
         }

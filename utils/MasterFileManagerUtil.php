@@ -64,3 +64,15 @@ if (!function_exists('getMasterFileFormatSize')) {
         return round($size, 2) . ' ' . $units[$unitIndex];
     }
 }
+
+if (!function_exists('masterFileManagerAsset')) {
+    function masterFileManagerAsset(string $path): string
+    {
+        if (config('master-file-manager.system_processing_directory') == 'public') {
+            $result = str_replace('storage/app/public', 'storage', $path);
+        } else {
+            $result = $path;
+        }
+        return asset($result);
+    }
+}

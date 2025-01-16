@@ -3,10 +3,33 @@
         max-height: 100%;
     }
 
+    .master-file-manager-main-section {
+        position: relative;
+        height: 75vh;
+        overflow: hidden;
+    }
+
     .master-file-manager {
         position: relative;
         height: 75vh;
         overflow: hidden;
+    }
+
+    .master-file-manager-loader-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffffffba;
+        z-index: 100;
+        user-select: none;
+        cursor: progress;
+    }
+
+    .loader-container-hide {
+        display: none;
     }
 
     .master-file-manager .sidebar-container {

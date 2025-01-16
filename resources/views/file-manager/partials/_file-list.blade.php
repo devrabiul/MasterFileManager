@@ -82,7 +82,7 @@
                             @if ($File['type'] == 'image')
                                 <div class="rounded">
                                     <img class="img-fluid" width="25"
-                                         src="{{ asset('storage/app/public/'.$File['path']) }}" alt="">
+                                         src="{{ masterFileManagerAsset('storage/app/public/'.$File['path']) }}" alt="">
                                 </div>
                             @elseif($File['type'] == 'video')
                                 @include("master-file-manager::file-manager.icons._video")
@@ -111,7 +111,7 @@
                                         class="mdi mdi-dots-horizontal"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="{{ asset('storage/app/public/'.$File['path']) }}" download>
+                                <a class="dropdown-item" href="{{ masterFileManagerAsset('storage/app/public/'.$File['path']) }}" download>
                                     <i class="mdi mdi-download me-2 text-muted vertical-middle"></i>
                                     Download
                                 </a>
