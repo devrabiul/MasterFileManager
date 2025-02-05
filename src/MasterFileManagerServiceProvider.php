@@ -10,20 +10,12 @@ class MasterFileManagerServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Set the SYSTEM_PROCESSING_DIRECTORY value
-        $fileContent = file_get_contents('index.php');
-        if (preg_match('/const SYSTEM_PROCESSING_DIRECTORY = \'(.*?)\';/', $fileContent, $matches)) {
-            $systemProcessingDirectory = $matches[1];
-        } else {
-            $systemProcessingDirectory = 'root';
-        }
-        // Update the configuration
-        config(['master-file-manager.system_processing_directory' => $systemProcessingDirectory]);
+        $this->updateProcessingDirectoryConfig();
 
         if ($this->app->runningInConsole()) {
             $this->registerPublishing();
         }
-         $this->registerResources();
+        $this->registerResources();
     }
 
     public function register()
@@ -33,8 +25,8 @@ class MasterFileManagerServiceProvider extends ServiceProvider
 
     private function registerResources()
     {
-        $this->loadMigrationsFrom(__DIR__.'./../database/migrations');
-        $this->loadRoutesFrom(__DIR__.'./../routes/web.php');
+        $this->loadMigrationsFrom(__DIR__ . './../database/migrations');
+        $this->loadRoutesFrom(__DIR__ . './../routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'master-file-manager');
         $this->commands($this->registerCommands());
     }
@@ -57,18 +49,35 @@ class MasterFileManagerServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__.'/../config/master-file-manager.php' => config_path('master-file-manager.php'),
-            __DIR__.'/../resources/views' => $publishPath,
+            __DIR__ . '/../config/master-file-manager.php' => config_path('master-file-manager.php'),
+            __DIR__ . '/../resources/views' => $publishPath,
         ]);
     }
 
-    /**
-     * Recursively delete a directory.
-     *
-     * @param string $dir
-     * @return void
-     */
-    private function deleteDirectory($dir)
+    private function updateProcessingDirectoryConfig(): void
+    {
+        // Get the current script's directory
+        $scriptPath = realpath(dirname($_SERVER['SCRIPT_FILENAME']));
+
+        // Get Laravel base and public paths
+        $basePath = realpath(base_path());
+        $publicPath = realpath(public_path());
+
+        // Determine where the script is running from
+        if ($scriptPath === $publicPath) {
+            $systemProcessingDirectory = 'public';
+        } elseif ($scriptPath === $basePath) {
+            $systemProcessingDirectory = 'root';
+        } else {
+            $systemProcessingDirectory = 'unknown';
+        }
+
+        // Update the configuration
+        config(['master-file-manager.system_processing_directory' => $systemProcessingDirectory]);
+    }
+
+
+    private function deleteDirectory(string $dir): void
     {
         foreach (scandir($dir) as $item) {
             if ($item == '.' || $item == '..') continue;

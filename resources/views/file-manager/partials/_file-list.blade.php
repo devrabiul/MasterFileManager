@@ -58,11 +58,11 @@
                                         class="mdi mdi-dots-horizontal"></i></a>
                             <div class="dropdown-menu dropdown-menu-end">
 
-                                <div class="dropdown-item cursor-pointer" target="_blank" onclick="openFolderByAjax('{{ $folder['path'] }}')"
-                                   href="{{ route('admin.dashboard.file-manager.index', ['targetFolder'=> $folder['path']]) }}">
-                                    <i class="mdi mdi-pencil me-2 text-muted vertical-middle"></i>
-                                    {{ ('Open') }}
-                                </div>
+{{--                                <div class="dropdown-item cursor-pointer" target="_blank" onclick="openFolderByAjax('{{ $folder['path'] }}')"--}}
+{{--                                   href="{{ route('admin.dashboard.file-manager.index', ['targetFolder'=> $folder['path']]) }}">--}}
+{{--                                    <i class="mdi mdi-pencil me-2 text-muted vertical-middle"></i>--}}
+{{--                                    {{ ('Open') }}--}}
+{{--                                </div>--}}
 
                                 <a class="dropdown-item" href="javascript:">
                                     <i class="mdi mdi-delete me-2 text-muted vertical-middle"></i>

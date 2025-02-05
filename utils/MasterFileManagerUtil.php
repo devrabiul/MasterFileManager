@@ -43,19 +43,6 @@ if (!function_exists('renderMasterFileManagerView')) {
     }
 }
 
-if (!function_exists('renderMasterFileManagerStyle')) {
-    function renderMasterFileManagerStyle()
-    {
-        return view('master-file-manager::file-manager.partials._style');
-    }
-}
-
-if (!function_exists('renderMasterFileManagerJavaScript')) {
-    function renderMasterFileManagerJavaScript()
-    {
-        return view('master-file-manager::file-manager.partials._script');
-    }
-}
 
 if (!function_exists('getFileMinifyString')) {
     function getFileMinifyString($inputString, $prefixLength = 15, $suffixLength = 8, $ellipsis = '.....')

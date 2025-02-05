@@ -16,15 +16,15 @@ php artisan vendor:publish --provider="Devrabiul\MasterFileManager\MasterFileMan
 ```
 
 ```php
-{!! renderMasterFileManagerStyle() !!}
+@include('master-file-manager::style')
 ```
 
 
 ```php
-{!! renderMasterFileManagerView() !!}
+@include('master-file-manager::file-manager')
 ```
 
 
 ```php
-{!! renderMasterFileManagerJavaScript() !!}
+@include('master-file-manager::script')
 ```
