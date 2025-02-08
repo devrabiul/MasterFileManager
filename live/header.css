@@ -1,4 +1,34 @@
 .file-manager-header-container {
     background-color: rgba(8, 0, 255, 0.245);
     height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.file-manager-header-start {
+
+}
+
+.file-manager-header-end {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+}
+
+.file-manager-header-end button {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    background-color: #fff;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
+    padding: .5rem 1rem;
+    user-select: none;
+    border-radius: .25rem;
 }
