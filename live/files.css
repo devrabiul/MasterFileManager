@@ -1,0 +1,55 @@
+.file-manager-files-container {
+    width: calc(100% - var(--file-manager-sidebar-width));
+    padding: 1.5rem;
+}
+
+.file-manager-folders-section {
+    display: flex;
+    gap: .85rem;
+}
+
+.file-manager-folder-item {
+    box-shadow: var(--box-shadow-style-1);
+    background: var(--folder-item-bg);
+    width: 200px;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.file-manager-folder-item .folder-icon {
+    height: 80px;
+    overflow: hidden;
+}
+
+.file-manager-folder-item .folder-icon img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.file-manager-folder-item .folder-title {
+    font-size: .85rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 0 .25rem 0;
+}
+
+.file-manager-folder-item .folder-info {
+    font-size: .65rem;
+    font-weight: 400;
+}
+
+.file-manager-folder-item .files-option-element {
+    position: absolute;
+    top: 1rem;
+    inset-inline-end: 1rem;
+}
+
+.file-manager-folder-item .files-option-element .menu-dot {
+    border: 0;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: transparent;
+}
