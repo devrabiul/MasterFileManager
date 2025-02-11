@@ -1,8 +1,17 @@
+/* Files Container */
 .file-manager-files-container {
     width: calc(100% - var(--file-manager-sidebar-width));
     padding: 1.5rem;
     height: 100%;
     overflow-y: auto;
+    transition: 0.3s ease-in-out all;
+}
+
+/* Adjust file container width on smaller screens */
+@media (max-width: 768px) {
+    .file-manager-files-container {
+        width: 100%;
+    }
 }
 
 .file-manager-files-container::-webkit-scrollbar {
