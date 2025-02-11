@@ -18,6 +18,8 @@
         position: fixed;
         left: -100%;
         z-index: 1000;
+        height: calc(100vh - 60px);
+        margin-top: 60px;
     }
 
     .file-manager-sidebar-container.sidebar-active {

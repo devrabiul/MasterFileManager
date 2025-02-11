@@ -13,6 +13,7 @@
 /* Header Title */
 .file-manager-header-title {
     width: var(--file-manager-sidebar-width);
+    color: #364a63;
 }
 
 /* Header Options */
@@ -33,6 +34,12 @@
     display: flex;
     gap: 0.75rem;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .file-manager-header-end {
+        display: none;
+    }   
 }
 
 /* Buttons */
@@ -63,13 +70,14 @@
     font-size: 1rem;
 }
 
+.file-manager-header-start {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
 /* Responsive for smaller screens */
 @media (max-width: 768px) {
-    .file-manager-header-container {
-        height: auto;
-        padding: 1rem;
-    }
-
     .file-manager-header-title {
         width: 100%;
     }
@@ -89,22 +97,27 @@
 }
 
 /* Search Input */
+.file-manager-header-start .search-icon {
+    color: #364a63;
+}
+
 .file-manager-header-start input[type="search"] {
     width: 250px;
     padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
+    font-size: 0.8125rem;
+    border: none;
     border-radius: 0.25rem;
     outline: none;
     transition: 0.3s ease-in-out all;
-    background-color: #f9f9f9;
+    color: #364a63;
+    letter-spacing: .085rem;
+    background-color: transparent;
 }
 
 /* Focus Effect */
 .file-manager-header-start input[type="search"]:focus {
     border-color: #007bff;
     background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 /* Clear Button (optional for search input) */
