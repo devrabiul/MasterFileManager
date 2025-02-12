@@ -92,10 +92,12 @@
     overflow: hidden;
 }
 
+.file-manager-folder-item .folder-icon svg,
 .file-manager-folder-item .folder-icon img {
     height: 60px;
     width: 100%;
     object-fit: contain;
+    fill: yellow;
 }
 
 .file-manager-folder-item .folder-title {

@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="files.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.css">
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css">
+    <link rel="stylesheet" href="filepond/filepond.css">
     
 </head>
 
@@ -20,6 +24,9 @@
     <!-- Header Container | Start -->
     <section class="file-manager-header-container temp-border">
         <div class="file-manager-header-title">
+            <button id="sidebarToggle" class="sidebar-toggle">
+                <i class="bi bi-list"></i>
+            </button>
             <h4>File Manager</h4>
         </div>
 
@@ -30,13 +37,8 @@
             </div>
     
             <div class="file-manager-header-end">
-                <button>
+                <button id="createBtn">
                     <span><i class="bi bi-plus"></i></span>
-                    <span>Create</span>
-                </button>
-    
-                <button>
-                    <span><i class="bi bi-cloud-arrow-up"></i></span>
                     <span>Upload</span>
                 </button>
             </div>
@@ -49,7 +51,101 @@
 
         <!-- Sidebar Container | Start -->
         <section class="file-manager-sidebar-container temp-border">
+            <button class="sidebar-close-mobile">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <div class="sidebar-header">
+                <h4>My Storage</h4>
+            </div>
 
+            <!-- Storage Status -->
+            <div class="storage-status">
+                <div class="storage-info">
+                    <div class="storage-text">
+                        <span>Storage Used</span>
+                        <span>75.5 GB of 100 GB</span>
+                    </div>
+                    <div class="storage-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75.5%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Storage Types -->
+                <div class="storage-types">
+                    <div class="storage-type-item">
+                        <div class="type-icon documents">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <div class="type-info">
+                            <span class="type-name">Documents</span>
+                            <span class="type-size">25.5 GB</span>
+                        </div>
+                    </div>
+
+                    <div class="storage-type-item">
+                        <div class="type-icon images">
+                            <i class="bi bi-image"></i>
+                        </div>
+                        <div class="type-info">
+                            <span class="type-name">Images</span>
+                            <span class="type-size">15.3 GB</span>
+                        </div>
+                    </div>
+
+                    <div class="storage-type-item">
+                        <div class="type-icon videos">
+                            <i class="bi bi-camera-video"></i>
+                        </div>
+                        <div class="type-info">
+                            <span class="type-name">Videos</span>
+                            <span class="type-size">22.8 GB</span>
+                        </div>
+                    </div>
+
+                    <div class="storage-type-item">
+                        <div class="type-icon others">
+                            <i class="bi bi-folder"></i>
+                        </div>
+                        <div class="type-info">
+                            <span class="type-name">Others</span>
+                            <span class="type-size">11.9 GB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Access -->
+            <div class="quick-access">
+                <h5>Quick Access</h5>
+                <div class="quick-access-items">
+                    <a href="#" class="quick-access-item">
+                        <i class="bi bi-image"></i>
+                        <span>Images</span>
+                    </a>
+                    <a href="#" class="quick-access-item">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>Documents</span>
+                    </a>
+                    <a href="#" class="quick-access-item">
+                        <i class="bi bi-camera-video"></i>
+                        <span>Videos</span>
+                    </a>
+                    <a href="#" class="quick-access-item">
+                        <i class="bi bi-music-note-beamed"></i>
+                        <span>Music</span>
+                    </a>
+                    <a href="#" class="quick-access-item">
+                        <i class="bi bi-download"></i>
+                        <span>Downloads</span>
+                    </a>
+                    <a href="#" class="quick-access-item">
+                        <i class="bi bi-trash"></i>
+                        <span>Trash</span>
+                    </a>
+                </div>
+            </div>
         </section>
         <!-- Sidebar Container | End -->
 
@@ -66,7 +162,7 @@
             <div class="file-manager-folders-section">
                 <div class="file-manager-folder-item">
                     <div class="folder-icon">
-                        <img src="/../public/assets/images/folder.svg" alt="" srcset="">
+                        <img src="/../public/assets/images/folder.svg" alt="" srcset="" class="svg">
                     </div>
                     <div class="folder-title">
                         Folder Name
@@ -166,23 +262,6 @@
                     </div>
                 </div>
                 
-                <div class="file-manager-folder-item">
-                    <div class="folder-icon">
-                        <img src="./../public/assets/images/folder.svg" alt="" srcset="">
-                    </div>
-                    <div class="folder-title">
-                        Folder Name
-                    </div>
-
-                    <div class="folder-info">
-                        25 MB
-                    </div>
-
-                    <div class="files-option-element">
-                        <button class="menu-dot"><i class="bi bi-three-dots"></i></button>
-                    </div>
-                </div>
-
                 <div class="file-manager-folder-item">
                     <div class="folder-icon">
                         <img src="./../public/assets/images/folder.svg" alt="" srcset="">
@@ -423,6 +502,44 @@
 
     </section>
     <!-- Main Container | End -->
+
+
+    <!-- Add this before the closing body tag -->
+    <div class="modal-overlay" id="createModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Upload Files</h5>
+                <button class="close-modal"><i class="bi bi-x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area">
+                    <div class="filepond-wrapper">
+                        <input type="file" class="filepond" name="files" multiple>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-actions">
+                <button type="button" class="btn-cancel">Cancel</button>
+                <button type="button" class="btn-upload">
+                    <i class="bi bi-cloud-arrow-up"></i>
+                    Upload
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- First load jQuery -->
+    <script src="jquery-3.7.1.min.js"></script>
+
+    <!-- Then load FilePond and its plugins -->
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+
+    <!-- Finally load your custom scripts -->
+    <script src="files.js"></script>
 
 </body>
 
