@@ -1,28 +1,11 @@
-<script>
-    function openFolderByAjax(targetFolder, folderName) {
-        const url = new URL(window.location.href);
+<!-- First load jQuery -->
+<script src="{{ masterFileManagerAsset('assets/js/jquery-3.7.1.min.js') }}"></script>
 
-        $.ajax({
-            url: "{{ route('master-file-manager.folder-content') }}",
-            type: 'POST',
-            data: {
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                targetFolder: targetFolder,
-            },
-            beforeSend: function () {
-                $(".master-file-manager-loader-container").removeClass('loader-container-hide');
-            },
-            success: function (response) {
-                $('.master-file-manager-container').fadeOut('fast', function () {
-                    $(this).empty().html(response.html).fadeIn('fast');
-                });
+<!-- Then load FilePond and its plugins -->
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
 
-                targetFolder ? url.searchParams.set('targetFolder', targetFolder) : url.searchParams.delete('targetFolder');
-                window.history.pushState({}, '', url);
-            },
-            complete: function () {
-                $(".master-file-manager-loader-container").addClass('loader-container-hide');
-            },
-        });
-    }
-</script>
+<!-- Finally load your custom scripts -->
+<script src="{{ masterFileManagerAsset('assets/js/files.js') }}"></script>

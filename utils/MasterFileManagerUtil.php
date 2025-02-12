@@ -71,8 +71,8 @@ if (!function_exists('getMasterFileFormatSize')) {
     }
 }
 
-if (!function_exists('masterFileManagerAsset')) {
-    function masterFileManagerAsset(string $path): string
+if (!function_exists('masterFileManagerStorage')) {
+    function masterFileManagerStorage(string $path): string
     {
         if (config('master-file-manager.system_processing_directory') == 'public') {
             $result = str_replace('storage/app/public', 'storage', $path);
@@ -83,6 +83,17 @@ if (!function_exists('masterFileManagerAsset')) {
     }
 }
 
+if (!function_exists('masterFileManagerAsset')) {
+    function masterFileManagerAsset(string $path): string
+    {
+        if (config('master-file-manager.system_processing_directory') == 'public') {
+            $result = asset('vendor/devrabiul/master-file-manager/' . $path);
+        } else {
+            $result = asset('public/vendor/devrabiul/master-file-manager/' . $path);
+        }
+        return $result;
+    }
+}
 
 if (!function_exists('masterFileManagerCacheKeys')) {
     function masterFileManagerCacheKeys($cacheKey): void

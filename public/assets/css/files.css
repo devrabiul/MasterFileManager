@@ -1,0 +1,232 @@
+/* Files Container */
+.file-manager-files-container {
+    width: calc(100% - var(--file-manager-sidebar-width));
+    padding: 1.5rem;
+    height: 100%;
+    overflow-y: auto;
+    transition: 0.3s ease-in-out all;
+}
+
+/* Adjust file container width on smaller screens */
+@media (max-width: 768px) {
+    .file-manager-files-container {
+        width: 100%;
+    }
+}
+
+.file-manager-files-container::-webkit-scrollbar {
+    position: absolute;
+    width: .25rem;
+}
+
+.file-manager-files-container::-webkit-scrollbar-thumb {
+    background: #019875;
+}
+
+.file-manager-files-container::-webkit-scrollbar-track {
+    background: #072342;
+}
+
+.file-manager-files-container .folders-section-title {
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-bottom: .5rem;
+    color: #364a63;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    user-select: none;
+}
+
+.file-manager-files-container .folders-section-subtitle {
+    font-size: .85rem;
+    line-height: 1rem;
+    margin-bottom: .85rem;
+    color: #364a63;
+}
+
+/* File Manager Folders Section || Start */
+.file-manager-folders-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+    grid-auto-flow: dense;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1200px) {
+    .file-manager-folders-section {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .file-manager-folders-section {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .file-manager-folders-section {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+
+.file-manager-folder-item {
+    background: var(--folder-item-bg);
+    border-radius: var(--folder-border-radius);
+    box-shadow: var(--box-shadow-style-1);
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+.file-manager-folder-item .folder-icon {
+    height: 70px;
+    display: flex;
+    align-items: end;
+    overflow: hidden;
+}
+
+.file-manager-folder-item .folder-icon svg,
+.file-manager-folder-item .folder-icon img {
+    height: 60px;
+    width: 100%;
+    object-fit: contain;
+    fill: yellow;
+}
+
+.file-manager-folder-item .folder-title {
+    font-size: .85rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 0 .25rem 0;
+}
+
+.file-manager-folder-item .folder-info {
+    font-size: .65rem;
+    font-weight: 400;
+}
+
+.file-manager-folder-item .files-option-element {
+    position: absolute;
+    top: 1rem;
+    inset-inline-end: 1rem;
+}
+
+.file-manager-folder-item .files-option-element .menu-dot {
+    border: 0;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: transparent;
+}
+
+/* File Manager Folders Section || End */
+
+
+/* File Manager Files Section || Start */
+.file-manager-files-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    grid-auto-flow: dense;
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: start;
+    overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+    .file-manager-files-section {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .file-manager-files-section {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .file-manager-files-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.file-manager-files-item {
+    background: var(--folder-item-bg);
+    border-radius: var(--folder-border-radius);
+    box-shadow: var(--box-shadow-style-1);
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.file-manager-files-item .files-icon {
+    height: auto;
+    width: 80px;
+    display: flex;
+    align-items: end;
+    overflow: hidden;
+}
+
+.file-manager-files-item .files-icon img {
+    height: auto;
+    width: 100%;
+    object-fit: contain;
+}
+
+.file-manager-files-item .files-information {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+.file-manager-files-item .files-title {
+    font-size: .85rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 0 .25rem 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80%;
+}
+
+.file-manager-files-item .files-info {
+    font-size: .65rem;
+    font-weight: 400;
+}
+
+.file-manager-files-item .files-option-element {
+    position: absolute;
+    top: 1rem;
+    inset-inline-end: 1rem;
+}
+
+.file-manager-files-item .files-option-element .menu-dot {
+    border: 0;
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: transparent;
+}
+
+/* File Manager Files Section || End */

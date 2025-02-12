@@ -4,6 +4,8 @@ namespace Devrabiul\MasterFileManager;
 
 use Devrabiul\MasterFileManager\Console\EmptyTrash;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class MasterFileManagerServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,7 @@ class MasterFileManagerServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->registerPublishing();
+            $this->copyPublicAssets(); // Manually copy assets
         }
         $this->registerResources();
     }
@@ -38,20 +41,59 @@ class MasterFileManagerServiceProvider extends ServiceProvider
         ];
     }
 
-    private function registerPublishing()
+    private function registerPublishing(): void
     {
-        // Define the publishing path for the views
-        $publishPath = resource_path('views/vendor/master-file-manager');
+        $packagePublicPath = __DIR__ . '/../public';
+        $publicPath = public_path('vendor/devrabiul/master-file-manager');
+        $viewsPath = resource_path('views/vendor/master-file-manager');
 
-        // Check if the views already exist, and if so, remove them
-        if (is_dir($publishPath)) {
-            $this->deleteDirectory($publishPath);
+        // Ensure the target directories exist before publishing
+        if (!is_dir($packagePublicPath)) {
+            Log::error("MasterFileManager: Public assets directory not found at $packagePublicPath");
+            return;
         }
+
+        // Publish assets, config, and views with separate tags
+        $this->publishes([
+            $packagePublicPath => $publicPath,
+        ], 'master-file-manager-assets');
 
         $this->publishes([
             __DIR__ . '/../config/master-file-manager.php' => config_path('master-file-manager.php'),
-            __DIR__ . '/../resources/views' => $publishPath,
-        ]);
+        ], 'master-file-manager-config');
+
+        $this->publishes([
+            __DIR__ . '/../resources/views' => $viewsPath,
+        ], 'master-file-manager-views');
+
+        // Publish all assets with a single tag
+        $this->publishes([
+            $packagePublicPath => $publicPath,
+            __DIR__ . '/../config/master-file-manager.php' => config_path('master-file-manager.php'),
+            __DIR__ . '/../resources/views' => $viewsPath,
+        ], 'master-file-manager');
+    }
+
+    private function copyPublicAssets(): void
+    {
+        $packagePublicPath = __DIR__ . '/../public';
+        $publicPath = public_path('vendor/devrabiul/master-file-manager');
+
+        // Ensure the package's public folder exists
+        if (!is_dir($packagePublicPath)) {
+            \Log::error("MasterFileManager: Public assets directory not found at $packagePublicPath");
+            return;
+        }
+
+        // Clean existing directory before copying
+        if (is_dir($publicPath)) {
+            File::deleteDirectory($publicPath);
+        }
+
+        // Copy files from package to public/vendor/devrabiul/master-file-manager
+        File::copyDirectory($packagePublicPath, $publicPath);
+
+        \Log::info("MasterFileManager: Public assets copied successfully.");
     }
 
     private function updateProcessingDirectoryConfig(): void

@@ -1,1 +1,1 @@
-{!! renderMasterFileManagerView() !!}
+@include('master-file-manager::layout')
