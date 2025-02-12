@@ -119,23 +119,64 @@ $(document).ready(function() {
         }, 1000);
     });
 
-    // Sidebar Toggle
-    $('#sidebarToggle').click(function() {
+    // Sidebar Toggle Functionality
+    $('#sidebarToggle').click(function(e) {
+        e.stopPropagation(); // Prevent event bubbling
         $('.file-manager-sidebar-container').toggleClass('show');
         $('.sidebar-overlay').toggleClass('show');
+        $('body').toggleClass('sidebar-open'); // Add this to prevent body scroll
+    });
+
+    // Close sidebar with mobile X button
+    $('.sidebar-close-mobile').click(function(e) {
+        e.stopPropagation(); // Prevent event bubbling
+        closeSidebar();
     });
 
     // Close sidebar when clicking overlay
-    $('.sidebar-overlay').click(function() {
-        $('.file-manager-sidebar-container').removeClass('show');
-        $('.sidebar-overlay').removeClass('show');
+    $('.sidebar-overlay').click(function(e) {
+        e.stopPropagation(); // Prevent event bubbling
+        closeSidebar();
+    });
+
+    // Close sidebar when clicking outside
+    $(document).click(function(e) {
+        if ($(window).width() <= 768) {
+            const sidebar = $('.file-manager-sidebar-container');
+            const sidebarToggle = $('#sidebarToggle');
+            
+            if (!sidebar.is(e.target) && 
+                sidebar.has(e.target).length === 0 && 
+                !sidebarToggle.is(e.target) && 
+                sidebarToggle.has(e.target).length === 0) {
+                closeSidebar();
+            }
+        }
+    });
+
+    // Close sidebar with escape key
+    $(document).keyup(function(e) {
+        if (e.key === "Escape") {
+            closeSidebar();
+        }
     });
 
     // Close sidebar on window resize if larger than mobile breakpoint
     $(window).resize(function() {
         if ($(window).width() > 768) {
-            $('.file-manager-sidebar-container').removeClass('show');
-            $('.sidebar-overlay').removeClass('show');
+            closeSidebar();
         }
+    });
+
+    // Helper function to close sidebar
+    function closeSidebar() {
+        $('.file-manager-sidebar-container').removeClass('show');
+        $('.sidebar-overlay').removeClass('show');
+        $('body').removeClass('sidebar-open');
+    }
+
+    // Prevent sidebar content clicks from closing the sidebar
+    $('.file-manager-sidebar-container').click(function(e) {
+        e.stopPropagation();
     });
 });

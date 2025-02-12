@@ -7,7 +7,6 @@
     background: #fff;
     transition: all 0.3s ease;
     position: relative;
-    z-index: 100;
 }
 
 /* Sidebar Toggle Button */
@@ -211,15 +210,30 @@
 
     .file-manager-sidebar-container {
         position: fixed;
-        left: -280px;
+        left: -100%;
         top: 0;
         height: 100vh;
-        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-        padding-top: 3.5rem;
+        width: 280px;
+        z-index: 1000;
+        box-shadow: none;
+        transition: all 0.3s ease-in-out;
     }
 
     .file-manager-sidebar-container.show {
         left: 0;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        transition: all 0.3s ease;
     }
 
     .sidebar-overlay.show {
@@ -228,6 +242,25 @@
 
     .sidebar-close-mobile {
         display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: #666;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1001;
+    }
+
+    .sidebar-close-mobile:hover {
+        color: #333;
+    }
+
+    /* Prevent body scroll when sidebar is open */
+    body.sidebar-open {
+        overflow: hidden;
     }
 
     /* Adjust main content when sidebar is hidden */
