@@ -22,128 +22,119 @@
 <body>
 
     <!-- Header Container | Start -->
-    <section class="file-manager-header-container temp-border">
-        <div class="file-manager-header-title">
+    <section class="file-manager-header">
+        <div class="header-left">
             <button id="sidebarToggle" class="sidebar-toggle">
                 <i class="bi bi-list"></i>
             </button>
             <h4>File Manager</h4>
         </div>
 
-        <div class="file-manager-header-option">
-            <div class="file-manager-header-start">
-                <span class="search-icon"><i class="bi bi-search"></i></span>
-                <input type="search" name="" id="" placeholder="Search files, folders">
+        <div class="header-right">
+            <div class="search-container">
+                <i class="bi bi-search"></i>
+                <input type="search" placeholder="Search files, folders">
             </div>
-    
-            <div class="file-manager-header-end">
-                <button id="createBtn">
-                    <span><i class="bi bi-plus"></i></span>
-                    <span>Upload</span>
-                </button>
-            </div>
+
+            <button id="createBtn" class="upload-btn">
+                <i class="bi bi-plus"></i>
+                <span>Upload</span>
+            </button>
         </div>
     </section>
     <!-- Header Container | End -->
 
     <!-- Main Container | Start -->
     <section class="file-manager-main-container temp-border">
-
         <!-- Sidebar Container | Start -->
-        <section class="file-manager-sidebar-container temp-border">
+        <section class="file-manager-sidebar-container">
             <button class="sidebar-close-mobile">
                 <i class="bi bi-x-lg"></i>
             </button>
-            <div class="sidebar-header">
-                <h4>My Storage</h4>
-            </div>
-
-            <!-- Storage Status -->
-            <div class="storage-status">
-                <div class="storage-info">
-                    <div class="storage-text">
-                        <span>Storage Used</span>
-                        <span>75.5 GB of 100 GB</span>
-                    </div>
-                    <div class="storage-progress">
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 75.5%;"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Storage Types -->
-                <div class="storage-types">
-                    <div class="storage-type-item">
-                        <div class="type-icon documents">
-                            <i class="bi bi-file-earmark-text"></i>
-                        </div>
-                        <div class="type-info">
-                            <span class="type-name">Documents</span>
-                            <span class="type-size">25.5 GB</span>
-                        </div>
-                    </div>
-
-                    <div class="storage-type-item">
-                        <div class="type-icon images">
-                            <i class="bi bi-image"></i>
-                        </div>
-                        <div class="type-info">
-                            <span class="type-name">Images</span>
-                            <span class="type-size">15.3 GB</span>
-                        </div>
-                    </div>
-
-                    <div class="storage-type-item">
-                        <div class="type-icon videos">
-                            <i class="bi bi-camera-video"></i>
-                        </div>
-                        <div class="type-info">
-                            <span class="type-name">Videos</span>
-                            <span class="type-size">22.8 GB</span>
-                        </div>
-                    </div>
-
-                    <div class="storage-type-item">
-                        <div class="type-icon others">
-                            <i class="bi bi-folder"></i>
-                        </div>
-                        <div class="type-info">
-                            <span class="type-name">Others</span>
-                            <span class="type-size">11.9 GB</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            
             <!-- Quick Access -->
-            <div class="quick-access">
-                <h5>Quick Access</h5>
+            <h5 class="quick-access-section-title">Quick Access</h5>
+            <div class="quick-access-section">
                 <div class="quick-access-items">
-                    <a href="#" class="quick-access-item">
-                        <i class="bi bi-image"></i>
-                        <span>Images</span>
+                    <a href="#" class="quick-access-item" data-type="recent">
+                        <div class="quick-access-content">
+                            <i class="bi bi-clock-history"></i>
+                            <span>Recent Files</span>
+                        </div>
+                        <span class="type-size">--</span>
                     </a>
-                    <a href="#" class="quick-access-item">
-                        <i class="bi bi-file-earmark-text"></i>
-                        <span>Documents</span>
+                    <a href="#" class="quick-access-item" data-type="favorites">
+                        <div class="quick-access-content">
+                            <i class="bi bi-star"></i>
+                            <span>Favorites</span>
+                        </div>
+                        <span class="type-size">--</span>
                     </a>
-                    <a href="#" class="quick-access-item">
-                        <i class="bi bi-camera-video"></i>
-                        <span>Videos</span>
+                    <a href="#" class="quick-access-item" data-type="images">
+                        <div class="quick-access-content">
+                            <i class="bi bi-image"></i>
+                            <span>Images</span>
+                        </div>
+                        <span class="type-size">15.3 GB</span>
                     </a>
-                    <a href="#" class="quick-access-item">
-                        <i class="bi bi-music-note-beamed"></i>
-                        <span>Music</span>
+                    <a href="#" class="quick-access-item" data-type="documents">
+                        <div class="quick-access-content">
+                            <i class="bi bi-file-earmark-text"></i>
+                            <span>Documents</span>
+                        </div>
+                        <span class="type-size">5.2 GB</span>
                     </a>
-                    <a href="#" class="quick-access-item">
-                        <i class="bi bi-download"></i>
-                        <span>Downloads</span>
+                    <a href="#" class="quick-access-item" data-type="videos">
+                        <div class="quick-access-content">
+                            <i class="bi bi-camera-video"></i>
+                            <span>Videos</span>
+                        </div>
+                        <span class="type-size">32.1 GB</span>
                     </a>
-                    <a href="#" class="quick-access-item">
-                        <i class="bi bi-trash"></i>
-                        <span>Trash</span>
+                    <a href="#" class="quick-access-item" data-type="music">
+                        <div class="quick-access-content">
+                            <i class="bi bi-music-note-beamed"></i>
+                            <span>Music</span>
+                        </div>
+                        <span class="type-size">12.8 GB</span>
                     </a>
+                
+                </div>
+            </div>
+
+            <!-- Storage Info -->
+            <div class="storage-info-section">
+                <!-- Storage Summary -->
+                <div class="storage-overview">
+                    <div class="storage-header">
+                        <div class="storage-title">
+                            <i class="bi bi-hdd-fill"></i>
+                            <span>Storage</span>
+                        </div>
+                        <span class="storage-percentage">75.5%</span>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="storage-progress">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75.5%">
+                            <div class="progress-glow"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Details -->
+                <div class="storage-details">
+                    <div class="storage-used">
+                        <span class="storage-label">Used</span>
+                        <span class="storage-value">75.5 GB</span>
+                    </div>
+                    <div class="storage-divider"></div>
+                    <div class="storage-total">
+                        <span class="storage-label">Total</span>
+                        <span class="storage-value">100 GB</span>
+                    </div>
                 </div>
             </div>
         </section>
