@@ -12,8 +12,8 @@ class MasterFileManagerService
     {
         $GenData = [];
         $request = !empty($request) ? $request : request()->all();
-        $targetFolder = !empty($targetFolder) ? $targetFolder : request('targetFolder');
-        $AllFilesInCurrentFolder = Storage::disk('public')->allFiles($targetFolder);
+        $targetFolder = !empty($targetFolder) ? $targetFolder : request('targetFolder') ?? '/';
+        $AllFilesInCurrentFolder = Storage::disk('public')->files($targetFolder);
         $GenData['path'] = $AllFilesInCurrentFolder;
 
         $FilesWithInfo = [];
@@ -178,4 +178,103 @@ class MasterFileManagerService
         ];
     }
 
+    public static function getRecentFiles($limit = 10): array
+    {
+        $targetFolder = null;
+        $allFiles = self::getAllFiles($targetFolder);
+        
+        // Sort files by last modified time
+        usort($allFiles['files'], function($a, $b) {
+            $timeA = Storage::disk('public')->lastModified($a['path']);
+            $timeB = Storage::disk('public')->lastModified($b['path']);
+            return $timeB - $timeA;
+        });
+
+        // Get only the specified number of recent files
+        $recentFiles = array_slice($allFiles['files'], 0, $limit);
+        
+        return [
+            'files' => $recentFiles,
+            'totalFiles' => count($recentFiles),
+            'size' => self::calculateTotalSize($recentFiles)
+        ];
+    }
+
+    public static function getFavoriteFiles(): array
+    {
+        // Assuming favorites are stored in a JSON file or database
+        $favoritesPath = Storage::disk('public')->path('favorites.json');
+        $favorites = [];
+        
+        if (file_exists($favoritesPath)) {
+            $favoritesList = json_decode(file_get_contents($favoritesPath), true) ?? [];
+            
+            foreach ($favoritesList as $filePath) {
+                if (Storage::disk('public')->exists($filePath)) {
+                    $fileInfo = self::getFileInformation(Crypt::encryptString($filePath));
+                    $favorites[] = $fileInfo;
+                }
+            }
+        }
+        
+        return [
+            'files' => $favorites,
+            'totalFiles' => count($favorites),
+            'size' => self::calculateTotalSize($favorites)
+        ];
+    }
+
+    private static function calculateTotalSize(array $files): string 
+    {
+        $totalSize = 0;
+        foreach ($files as $file) {
+            $totalSize += $file['sizeInInteger'] ?? 0;
+        }
+        return getMasterFileFormatSize($totalSize);
+    }
+
+    public static function toggleFavorite($filePath): bool
+    {
+        $favoritesPath = Storage::disk('public')->path('favorites.json');
+        $favorites = [];
+        
+        if (file_exists($favoritesPath)) {
+            $favorites = json_decode(file_get_contents($favoritesPath), true) ?? [];
+        }
+        
+        $index = array_search($filePath, $favorites);
+        if ($index !== false) {
+            // Remove from favorites
+            unset($favorites[$index]);
+            $favorites = array_values($favorites);
+        } else {
+            // Add to favorites
+            $favorites[] = $filePath;
+        }
+        
+        return file_put_contents($favoritesPath, json_encode($favorites)) !== false;
+    }
+
+    public static function getQuickAccessFilesByType(string $type, string|null $targetFolder = null): array
+    {
+        $allFiles = self::getAllFiles($targetFolder, ['filter' => $type]);
+        
+        return [
+            'files' => $allFiles['files'],
+            'totalFiles' => count($allFiles['files']),
+            'size' => self::calculateTotalSize($allFiles['files'])
+        ];
+    }
+
+    public static function getQuickAccessStats(): array
+    {
+        return [
+            'recent' => self::getRecentFiles(),
+            'favorites' => self::getFavoriteFiles(),
+            'images' => self::getQuickAccessFilesByType('image', '/'),
+            'videos' => self::getQuickAccessFilesByType('video', '/'),
+            'music' => self::getQuickAccessFilesByType('audio', '/'),
+            'documents' => self::getQuickAccessFilesByType('application', '/')
+        ];
+    }
 }

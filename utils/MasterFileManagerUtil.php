@@ -34,7 +34,7 @@ if (!function_exists('renderMasterFileManagerView')) {
         $lastFolderArray = explode('/', $targetFolder);
         $lastFolder = count($lastFolderArray) > 1 ? str_replace('/' . end($lastFolderArray), '', $targetFolder) : '';
 
-        return view('master-file-manager::file-manager.partials.container', [
+        return view('master-file-manager::partials._content', [
             'folderArray' => $folderArray,
             'AllFilesInCurrentFolder' => $AllFilesInCurrentFolder,
             'lastFolder' => $lastFolder,

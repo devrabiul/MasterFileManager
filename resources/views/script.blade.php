@@ -9,3 +9,4 @@
 
 <!-- Finally load your custom scripts -->
 <script src="{{ masterFileManagerAsset('assets/js/files.js') }}"></script>
+<script src="{{ masterFileManagerAsset('assets/js/functions.js') }}"></script>
