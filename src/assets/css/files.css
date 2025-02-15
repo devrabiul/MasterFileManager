@@ -2,7 +2,7 @@
 .file-manager-files-container {
     width: calc(100% - var(--file-manager-sidebar-width));
     padding: 1.5rem;
-    height: 100vh; /* Changed to 100vh to ensure full viewport height */
+    height: 100%;
     overflow-y: auto;
     transition: 0.3s ease-in-out all;
     position: relative;
