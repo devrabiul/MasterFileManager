@@ -46,6 +46,12 @@
     color: #364a63;
 }
 
+.file-manager-files-container .folders-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* File Manager Folders Section || Start */
 .file-manager-folders-section {
     display: grid;
@@ -533,3 +539,44 @@
     padding-bottom: 10px;
 }
 /* File Manager Modal || End */
+
+.folder-breadcrumb {
+
+}
+
+.folder-breadcrumb .breadcrumb {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.folder-breadcrumb .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.folder-breadcrumb .breadcrumb-item + .breadcrumb-item {
+    padding-left: 8px;
+}
+
+.folder-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: "→";
+    padding-right: 8px;
+    color: #019875;
+    font-weight: bold;
+}
+
+.folder-breadcrumb .breadcrumb-item a {
+    color: #019875;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.folder-breadcrumb .breadcrumb-item.active {
+    color: #364a63;
+}

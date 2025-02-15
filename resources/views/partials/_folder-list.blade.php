@@ -1,12 +1,42 @@
-<div>
+<div class="folders-section-header">
+    <div>
     <h5 class="folders-section-title">
         <span><i class="bi bi-folder-fill"></i></span>
         <span>Folders</span>
     </h5>
     <p class="folders-section-subtitle">Manage your folders easily</p>
+    </div>
+
+@if(request('targetFolder'))
+<div class="folder-breadcrumb mb-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none" onclick="openFolderByAjax('')">Root</a></li>
+            @php
+                $path = '';
+                $folders = explode('/', request('targetFolder'));
+            @endphp
+            @foreach($folders as $folder)
+                @php $path .= $folder . '/'; @endphp
+                <li class="breadcrumb-item {{ $loop->last ? 'active' : '' }}">
+                    @if(!$loop->last)
+                        <a href="#" class="text-decoration-none" onclick="openFolderByAjax('{{ rtrim($path, '/') }}')">
+                            {{ ucwords(str_replace(['-', '_'], ' ', $folder)) }}
+                        </a>
+                    @else
+                        {{ ucwords(str_replace(['-', '_'], ' ', $folder)) }}
+                    @endif
+                </li>
+            @endforeach
+        </ol>
+    </nav>
 </div>
+@endif
+</div>
+
+
 <div class="file-manager-folders-section">
-    @if(request('targetFolder'))    
+    @if(request('targetFolder'))
     <div class="file-manager-folder-item" onclick="openFolderByAjax('')">
         <div class="folder-icon folder-icon-back">
             <img src="{{ masterFileManagerAsset('assets/images/return-back.svg') }}" alt="" srcset="" class="svg">
@@ -27,12 +57,20 @@
     </div>
     @endif
     @foreach($folderArray as $folder)
-        <div class="file-manager-folder-item" 
+        <div class="file-manager-folder-item"
              onclick="openFolderByAjax('{{ $folder['path'] }}')"
              role="button"
+             @if(isset($folder['isImage']) && $folder['isImage'])
+             data-preview-url="{{ $folder['url'] ?? '' }}"
+             data-is-image="true"
+             @endif
              style="cursor: pointer;">
             <div class="folder-icon">
-                <img src="{{ masterFileManagerAsset('assets/images/folder.svg') }}" alt="" srcset="" class="svg">
+                @if(isset($folder['isImage']) && $folder['isImage'])
+                    <img src="{{ $folder['thumbnail'] ?? $folder['url'] }}" alt="{{ $folder['name'] }}" class="folder-thumbnail">
+                @else
+                    <img src="{{ masterFileManagerAsset('assets/images/folder.svg') }}" alt="" srcset="" class="svg">
+                @endif
             </div>
             <div class="folder-title">
                 {{ ucwords(str_replace('-', ' ', str_replace('_', ' ', $folder['name']))) }}
@@ -71,5 +109,5 @@
             </div>
         </div>
     @endforeach
-    
+
 </div>

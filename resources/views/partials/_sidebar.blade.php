@@ -14,13 +14,13 @@
                 </div>
                 <span class="type-size">{{ $quickAccess['recent']['totalFiles'] }} files</span>
             </a>
-            <a href="#" class="quick-access-item" data-type="favorites">
+            <!-- <a href="#" class="quick-access-item" data-type="favorites">
                 <div class="quick-access-content">
                     <i class="bi bi-star"></i>
                     <span>Favorites</span>
                 </div>
                 <span class="type-size">{{ $quickAccess['favorites']['totalFiles'] }} files</span>
-            </a>
+            </a> -->
             <a href="#" class="quick-access-item" data-type="images">
                 <div class="quick-access-content">
                     <i class="bi bi-image"></i>
